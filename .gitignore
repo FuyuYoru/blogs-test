@@ -1,0 +1,36 @@
+# ----------------------
+# PHP / Composer
+# ----------------------
+vendor/
+composer.lock
+
+# ----------------------
+# Smarty
+# ----------------------
+storage/templates_c/
+storage/cache/
+storage/logs/
+
+# ----------------------
+# Node / SCSS (если добавишь later)
+# ----------------------
+node_modules/
+dist/
+*.css.map
+
+# ----------------------
+# Docker
+# ----------------------
+docker-compose.override.yml
+*.env
+*.log
+
+# ----------------------
+# IDE / OS
+# ----------------------
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
