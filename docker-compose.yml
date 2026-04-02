@@ -20,6 +20,7 @@ services:
       - "8080:80"          # теперь только Nginx маппится на 8080
     volumes:
       - .:/var/www
+      - ./public/css:/var/www/app/public/css
       - ./docker/nginx.conf:/etc/nginx/conf.d/default.conf
     depends_on:
       - php

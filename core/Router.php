@@ -8,21 +8,32 @@ class Router {
     }
 
     public function dispatch($uri) {
-        $uri = parse_url($uri, PHP_URL_PATH);
-
+        $uriPath = parse_url($uri, PHP_URL_PATH);
         $method = $_SERVER['REQUEST_METHOD'];
 
-        if (!isset($this->routes[$method][$uri])) {
-            http_response_code(404);
-            echo "404";
+        if (isset($this->routes[$method][$uriPath])) {
+            [$controller, $methodName] = explode('@', $this->routes[$method][$uriPath]);
+            require_once "../app/Controllers/$controller.php";
+            $controller = new $controller();
+            $controller->$methodName();
             return;
         }
 
-        [$controller, $methodName] = explode('@', $this->routes[$method][$uri]);
+        foreach ($this->routes[$method] as $route => $action) {
+            $pattern = preg_replace('#\{[a-zA-Z_]+\}#', '([0-9]+)', $route);
+            $pattern = "#^$pattern$#";
 
-        require_once "../app/Controllers/$controller.php";
+            if (preg_match($pattern, $uriPath, $matches)) {
+                array_shift($matches); 
+                [$controller, $methodName] = explode('@', $action);
+                require_once "../app/Controllers/$controller.php";
+                $controller = new $controller();
+                $controller->$methodName(...$matches);
+                return;
+            }
+        }
 
-        $controller = new $controller();
-        $controller->$methodName();
+        http_response_code(404);
+        echo "404";
     }
 }

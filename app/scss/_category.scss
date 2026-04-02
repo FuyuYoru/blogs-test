@@ -1,0 +1,41 @@
+.category-section {
+  max-width: 100%;
+  margin: 40px auto;
+  padding: 0 $gutter;
+
+  .category-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+
+    h2 {
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+
+    a {
+      font-size: 14px;
+      text-decoration: none;
+      border-bottom: 3px solid;
+      color: $link-color;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+  }
+
+  .articles {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+}
+
+.articles {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}

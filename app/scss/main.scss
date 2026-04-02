@@ -1,0 +1,23 @@
+@import 'variables';
+@import 'header';
+@import 'category';
+@import 'article';
+@import 'footer';
+
+body {
+  font-family: $font-family;
+  background: $bg-color;
+  margin: 0;
+  color: $text-color;
+  display: flex;
+  flex-direction: column;
+  height: 100dvh;
+  .page-content {
+    margin: 0 12.5vw;
+    flex: 1;
+
+    @media (max-width: 1024px) {
+      margin: 0;
+    }
+  }
+}

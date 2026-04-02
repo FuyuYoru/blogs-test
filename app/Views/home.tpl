@@ -1,10 +1,9 @@
-{foreach $categories as $category}
-    <h2>{$category.name}</h2>
-    <p>{$category.description}</p>
-    <ul>
-        {foreach $category.articles as $article}
-            <li>{$article.title}</li>
-        {/foreach}
-    </ul>
-    <a href="/category/{$category.id}">Все статьи</a>
-{/foreach}
+{include file="header.tpl"}
+
+<div class="page-content">
+  {foreach $categories as $category}
+    {include file="category-card.tpl" category=$category}
+  {/foreach}
+</div>
+
+{include file="footer.tpl"}

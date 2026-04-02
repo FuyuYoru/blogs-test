@@ -24,13 +24,16 @@ foreach ($categories as $cat) {
     $categoryIds[] = $db->lastInsertId();
 }
 
+$imageFiles = glob(__DIR__ . '/public/images/*.jpg');
+
+
 // --- Генерация статей ---
 foreach ($categoryIds as $catId) {
     for ($i = 1; $i <= 5; $i++) {
         $title = "Статья {$i} категории {$categories[$catId-1]['name']}";
         $description = "Короткое описание {$title}";
         $content = "Полный текст статьи {$title}. Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
-        $image = "image{$i}.jpg";
+        $image = '/images/' . basename($imageFiles[array_rand($imageFiles)]);
 
         $stmt = $db->prepare("INSERT INTO articles (title, description, content, image) VALUES (:title, :description, :content, :image)");
         $stmt->execute([
